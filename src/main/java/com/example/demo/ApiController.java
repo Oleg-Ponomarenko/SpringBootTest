@@ -29,14 +29,14 @@ public class ApiController {
     //curl -X DELETE http://localhost:8080/messages/1
     @DeleteMapping("messages/{index}")
     public void deleteMessage(@PathVariable("index") Integer i) {
-        messages.remove(i);
+        messages.remove((int)i);
     }
 
     //curl -X PUT http://localhost:8080/messages/1 -H 'Content-Type:
     //text/plain' -d 'text'
     @PutMapping("messages/{index}")
     public void updateMessage(@PathVariable("index") Integer i, @RequestBody String message) {
-        messages.remove(i);
+        messages.remove((int)i);
         messages.add(i, message);
     }
 

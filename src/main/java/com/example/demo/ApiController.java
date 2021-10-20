@@ -9,6 +9,11 @@ public class ApiController {
 
     ArrayList<String> messages = new ArrayList<>();
 
+    ArrayList<User> users = new ArrayList<>();
+
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     @GetMapping("messages")
     public ArrayList<String> getMessage() {
         return messages;
@@ -61,6 +66,38 @@ public class ApiController {
     @DeleteMapping("messages/search/{text}")
     public void deleteMessages(@PathVariable("text") String text) {
         messages.removeIf(t -> t.contains(text));
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("users")
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    @GetMapping("users/{index}")
+    public User getUsers(@PathVariable("index") Integer i) {
+        return users.get(i);
+    }
+
+    //curl -X POST http://localhost:8080/users -H 'Content-Type:
+    //application/json' -d User("Oleg", 17)
+    @PostMapping("users")
+    public void createUser(@RequestBody User user) {
+        users.add(user);
+    }
+
+    //curl -X DELETE http://localhost:8080/users/1
+    @DeleteMapping("users/{index}")
+    public void deleteUser(@PathVariable("index") Integer i) {
+        users.remove((int)i);
+    }
+
+    //curl -X PUT http://localhost:8080/users/1 -H 'Content-Type:
+    //application/json' -d 20
+    @PutMapping("users/{index}")
+    public void updateMessage(@PathVariable("index") Integer i, @RequestBody Integer newAge) {
+        users.get(i).setAge(newAge);
     }
 }
 

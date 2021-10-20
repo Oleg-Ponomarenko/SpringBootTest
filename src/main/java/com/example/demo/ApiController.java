@@ -50,9 +50,17 @@ public class ApiController {
         return messages.toArray().length;
     }
 
-    /* @PostMapping("messages/{index}/create")
-    public void insertMessage(@PathVariable("index") String i, @RequestBody String message) {
-        messages.ins(message);
-    } */
+    //curl -X POST http://localhost:8080/messages/1/create -H 'Content-Type:
+    //text/plain' -d 'text'
+    @PostMapping("messages/{index}/create")
+    public void insertMessage(@PathVariable("index") Integer i, @RequestBody String message) {
+        messages.add(i, message);
+    }
+
+    //curl -X DELETE http://localhost:8080/messages/search/text1
+    @DeleteMapping("messages/search/{text}")
+    public void deleteMessages(@PathVariable("text") String text) {
+        messages.removeIf(t -> t.contains(text));
+    }
 }
 

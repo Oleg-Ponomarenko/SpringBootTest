@@ -39,5 +39,20 @@ public class ApiController {
         messages.remove(i);
         messages.add(i, message);
     }
+
+    @GetMapping("messages/search/{index}")
+    public int findMessage(@PathVariable("index") String i) {
+        return messages.indexOf(i);
+    }
+
+    @GetMapping("messages/count")
+    public int countMessages() {
+        return messages.toArray().length;
+    }
+
+    /* @PostMapping("messages/{index}/create")
+    public void insertMessage(@PathVariable("index") String i, @RequestBody String message) {
+        messages.ins(message);
+    } */
 }
 
